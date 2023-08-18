@@ -9,14 +9,15 @@ getButton.onclick = function(){
 
 
 function getRepos(pageNum){
+  let sw =document.getElementById('btn-gr');
+  sw.style.visibility='visible';
   fetch(`https://api.github.com/users/${inputValue.value}/repos?page=${pageNum}`)
   .then((response) => response.json())
   .then((data) => {
     reposData.innerHTML = '';
 
     let dataTable = document.createElement('table');
-    dataTable.className = 'table  table-hover table-bordered border bg-light table-striped mt-4 ms-4 text-center';
-
+    dataTable.className = 'table  table-hover table-bordered border bg-light table-striped mt-4 ms-4 text-center ';
     let headerRow = document.createElement('tr');
     let headerName = document.createElement('th');
     headerName.innerText = 'Repository Name ';
@@ -82,6 +83,7 @@ function getRepos(pageNum){
 const changePage=(pageNum)=>{
   let next =document.getElementById('nextButton');
   let prev =document.getElementById('prevButton');
+
   next.onclick = ()=>{
     getRepos(pageNum+=1);
   }
