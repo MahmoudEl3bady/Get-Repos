@@ -4,7 +4,7 @@ let reposData = document.querySelector('#show-Data');
 
 let pageNum =1;
 getButton.onclick = function(){
-  getRepos();
+  getRepos(pageNum);
 };
 
 
