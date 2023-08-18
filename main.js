@@ -2,14 +2,14 @@ let getButton = document.querySelector('#getBtn');
 let inputValue = document.querySelector('#input');
 let reposData = document.querySelector('#show-Data');
 
-
+let pageNum =1;
 getButton.onclick = function(){
   getRepos();
 };
 
 
-function getRepos(){
-  fetch(`https://api.github.com/users/${inputValue.value}/repos`)
+function getRepos(pageNum){
+  fetch(`https://api.github.com/users/${inputValue.value}/repos?page=${pageNum}`)
   .then((response) => response.json())
   .then((data) => {
     reposData.innerHTML = '';
@@ -42,7 +42,7 @@ function getRepos(){
     dataTable.appendChild(headerRow);
 
     data.forEach((repo) => {
-      console.log(repo);
+      // console.log(repo);
       let row = document.createElement('tr');
 
       let repoNameCell = document.createElement('td');
@@ -77,3 +77,18 @@ function getRepos(){
     reposData.appendChild(dataTable);
   });
 }
+
+
+const changePage=(pageNum)=>{
+  let next =document.getElementById('nextButton');
+  let prev =document.getElementById('prevButton');
+  next.onclick = ()=>{
+    getRepos(pageNum+=1);
+  }
+  prev.onclick = ()=>{
+    getRepos(pageNum-=1);
+
+  }
+}
+
+changePage(pageNum);
